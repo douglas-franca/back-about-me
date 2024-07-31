@@ -26,23 +26,23 @@ fi
 echo "Activating virtual environment..."
 source venv/bin/activate
 
-# Upgrade pip
+# Upgrade pip using the virtual environment's pip
 echo "Upgrading pip..."
-pip install --upgrade pip
+venv/bin/pip install --upgrade pip
 
-# Install the required packages from requirements.txt
+# Install the required packages from requirements.txt using the virtual environment's pip
 if [ -f "requirements.txt" ]; then
     echo "Installing required packages..."
-    pip install -r requirements.txt
+    venv/bin/pip install -r requirements.txt
 else
     echo "requirements.txt not found. Skipping package installation."
 fi
 
-# Install gunicorn
+# Install gunicorn using the virtual environment's pip
 echo "Installing gunicorn..."
-pip install gunicorn
+venv/bin/pip install gunicorn
 
 # Start the gunicorn server with 4 workers, binding to port 8000
 # Ensure the correct module or application entry point is specified
 echo "Starting gunicorn server..."
-gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
+venv/bin/gunicorn -w 4 -b 0.0.0.0:8000 wsgi:app
